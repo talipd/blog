@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{{form.media}}
+<h5>MAKALELER<h5>
+<hr>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">BAŞLIK</th>
+      <th scope="col">TARİH</th>
+      <th scope="col">YAZAR</th>
+      <th scope="col">RESİM</th>
+    </tr>
+  </thead>
+    <tbody>
+      {% for article in articles %}
+        <tr>
+          <th scope="row">{{article.id}}</th>
+          <td><a href = "/article/article/{{article.id}}">{{article.title|upper}}</a><br> <font face="Arial" size="1">{{article.created_data}}</font></td>
+          <td><font face="Arial" size="2"> {{article.content|safe|truncatewords:30}}</font></td>
+          <td><font face="Arial" size="2">{{article.author}}</font></td>
+          <td width="150" height="70">           
+            {% if article.article_image %}
+            <img class="img-fluid rounded" src={{article.article_image.url}} align="right"> 
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock body %}
